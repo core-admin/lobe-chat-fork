@@ -6,6 +6,7 @@ import market from '../default/market';
 import migration from '../default/migration';
 import plugin from '../default/plugin';
 import setting from '../default/setting';
+import tool from '../default/tool';
 import welcome from '../default/welcome';
 
 const resources = {
@@ -17,6 +18,7 @@ const resources = {
   migration,
   plugin,
   setting,
+  tool,
   welcome,
 } as const;
 
