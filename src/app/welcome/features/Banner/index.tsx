@@ -1,3 +1,8 @@
+/* eslint-disable unused-imports/no-unused-imports */
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+/* eslint-disable unused-imports/no-unused-vars */
 'use client';
 
 import { Icon } from '@lobehub/ui';
@@ -12,6 +17,22 @@ import { useSessionStore } from '@/store/session';
 
 import Hero from './Hero';
 import { useStyles } from './style';
+
+/* eslint-disable unused-imports/no-unused-imports */
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+/* eslint-disable unused-imports/no-unused-vars */
+
+/* eslint-disable unused-imports/no-unused-imports */
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+/* eslint-disable unused-imports/no-unused-vars */
+
+/* eslint-disable unused-imports/no-unused-imports */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable unused-imports/no-unused-vars */
 
 const Banner = memo<{ mobile?: boolean }>(({ mobile }) => {
   const { t } = useTranslation('welcome');
@@ -35,7 +56,7 @@ const Banner = memo<{ mobile?: boolean }>(({ mobile }) => {
         justify={'center'}
         width={'100%'}
       >
-        <DataImporter
+        {/* <DataImporter
           onFinishImport={() => {
             switchSession();
           }}
@@ -43,7 +64,7 @@ const Banner = memo<{ mobile?: boolean }>(({ mobile }) => {
           <Button block={mobile} size={'large'}>
             {t('button.import')}
           </Button>
-        </DataImporter>
+        </DataImporter> */}
         <Button
           block={mobile}
           onClick={() => (isMobile ? router?.push('/chat') : switchBackToChat())}

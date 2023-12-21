@@ -13,11 +13,14 @@ import { SessionAction, createSessionSlice } from './slices/session/action';
 //  ===============  聚合 createStoreFn ============ //
 
 export type SessionStore = SessionAction & AgentAction & SessionStoreState;
-const createStore: StateCreator<SessionStore, [['zustand/devtools', never]]> = (...parameters) => ({
-  ...initialState,
-  ...createAgentSlice(...parameters),
-  ...createSessionSlice(...parameters),
-});
+const createStore: StateCreator<SessionStore, [['zustand/devtools', never]]> = (...parameters) => {
+  console.log('parameters >>>', parameters);
+  return {
+    ...initialState,
+    ...createAgentSlice(...parameters),
+    ...createSessionSlice(...parameters),
+  };
+};
 
 //  ===============  persist 本地缓存中间件配置 ============ //
 

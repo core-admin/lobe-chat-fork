@@ -1,3 +1,6 @@
+/* eslint-disable unused-imports/no-unused-imports */
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Avatar, Form, Icon, Tooltip } from '@lobehub/ui';
 import { Button, Empty, Space, Switch, Tag, Typography } from 'antd';
 import isEqual from 'fast-deep-equal';
@@ -137,7 +140,7 @@ const AgentPlugin = memo(() => {
                     />
                   </Tooltip>
                 ) : null}
-                <Tooltip title={t('plugin.store')}>
+                {/* <Tooltip title={t('plugin.store')}>
                   <Button
                     icon={<Icon icon={Store} />}
                     onClick={(e) => {
@@ -146,7 +149,7 @@ const AgentPlugin = memo(() => {
                     }}
                     size={'small'}
                   />
-                </Tooltip>
+                </Tooltip> */}
               </Space.Compact>
             ),
             icon: LucideToyBrick,

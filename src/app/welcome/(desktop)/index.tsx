@@ -5,7 +5,7 @@ import { FC, memo } from 'react';
 
 import ResponsiveIndex from '@/components/ResponsiveIndex';
 
-import Footer from './features/Footer';
+// import Footer from './features/Footer';
 import Showcase from './features/Showcase';
 import Layout from './layout.desktop';
 
@@ -15,7 +15,7 @@ export default memo(() => (
   <ResponsiveIndex Mobile={Mobile}>
     <Layout>
       <Showcase />
-      <Footer />
+      {/* <Footer /> */}
     </Layout>
   </ResponsiveIndex>
 ));

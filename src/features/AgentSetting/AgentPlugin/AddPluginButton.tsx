@@ -1,3 +1,8 @@
+/* eslint-disable unused-imports/no-unused-imports */
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+/* eslint-disable unused-imports/no-unused-vars */
 import { Icon } from '@lobehub/ui';
 import { Button } from 'antd';
 import { PackagePlus } from 'lucide-react';
@@ -32,7 +37,7 @@ const AddPluginButton = forwardRef<HTMLButtonElement>((props, ref) => {
         onValueChange={updateNewDevPlugin}
         open={showModal}
       />
-      <Button
+      {/* <Button
         icon={<Icon icon={PackagePlus} />}
         onClick={() => {
           setModal(true);
@@ -41,7 +46,7 @@ const AddPluginButton = forwardRef<HTMLButtonElement>((props, ref) => {
         size={'small'}
       >
         {t('plugin.addTooltip')}
-      </Button>
+      </Button> */}
     </div>
   );
 });

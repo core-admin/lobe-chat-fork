@@ -13,8 +13,10 @@ const searchSessions = (s: SessionStore): LobeSessions => s.searchSessions;
 const pinnedSessionList = (s: SessionStore) =>
   defaultSessions(s).filter((s) => s.group === SessionGroupDefaultKeys.Pinned);
 
-const unpinnedSessionList = (s: SessionStore) =>
-  defaultSessions(s).filter((s) => s.group === SessionGroupDefaultKeys.Default);
+const unpinnedSessionList = (s: SessionStore) => {
+  console.log('unpinnedSessionList s.sessions >', s);
+  return defaultSessions(s).filter((s) => s.group === SessionGroupDefaultKeys.Default);
+};
 
 const getSessionById =
   (id: string) =>

@@ -1,8 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+/* eslint-disable unused-imports/no-unused-imports */
 import { useTheme } from 'antd-style';
 import { PropsWithChildren, memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
-import SideBar from '@/features/SideBar';
+// import SideBar from '@/features/SideBar';
 import { useIsPWA } from '@/hooks/useIsPWA';
 
 const AppLayoutDesktop = memo<PropsWithChildren>(({ children }) => {
@@ -16,7 +19,7 @@ const AppLayoutDesktop = memo<PropsWithChildren>(({ children }) => {
       style={isPWA ? { borderTop: `1px solid ${theme.colorBorder}` } : {}}
       width={'100%'}
     >
-      <SideBar />
+      {/* <SideBar /> */}
       {children}
     </Flexbox>
   );

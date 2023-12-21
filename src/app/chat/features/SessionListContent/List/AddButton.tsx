@@ -10,6 +10,7 @@ import { useSessionStore } from '@/store/session';
 const AddButton = memo<ButtonProps>((props) => {
   const { t } = useTranslation('chat');
   const createSession = useSessionStore((s) => s.createSession);
+  console.log(createSession);
   return (
     <Flexbox style={{ margin: '12px 16px' }}>
       <Button block icon={<Icon icon={Plus} />} onClick={() => createSession()} {...props}>

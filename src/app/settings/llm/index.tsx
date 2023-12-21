@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+/* eslint-disable unused-imports/no-unused-imports */
 'use client';
 
 import Link from 'next/link';
@@ -11,6 +14,13 @@ import { SettingsTabs } from '@/store/global/initialState';
 
 import LLM from './LLM';
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+/* eslint-disable unused-imports/no-unused-imports */
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable unused-imports/no-unused-imports */
+
 export default memo(() => {
   useSwitchSideBarOnInit(SettingsTabs.LLM);
   const { t } = useTranslation('setting');
@@ -18,7 +28,7 @@ export default memo(() => {
     <>
       <PageTitle title={t('tab.llm')} />
       <LLM />
-      <Footer>
+      {/* <Footer>
         <Trans i18nKey="llm.waitingForMore" ns={'setting'}>
           更多模型正在
           <Link
@@ -30,7 +40,7 @@ export default memo(() => {
           </Link>
           中 ，敬请期待 ✨
         </Trans>
-      </Footer>
+      </Footer> */}
     </>
   );
 });

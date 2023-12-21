@@ -11,9 +11,13 @@ import CollapseGroup from './CollapseGroup';
 import Inbox from './Inbox';
 import SessionList from './List';
 
+/**
+ * 会话列表-内容区
+ */
 const SessionListContent = memo(() => {
   const { t } = useTranslation('chat');
   const unpinnedSessionList = useSessionStore(sessionSelectors.unpinnedSessionList, isEqual);
+  console.log('unpinnedSessionList >>>', unpinnedSessionList);
   const pinnedList = useSessionStore(sessionSelectors.pinnedSessionList, isEqual);
   const hasPinnedSessionList = useSessionStore(sessionSelectors.hasPinnedSessionList);
 

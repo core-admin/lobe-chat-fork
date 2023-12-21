@@ -1,12 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+/* eslint-disable unused-imports/no-unused-vars */
 import { type MobileNavBarTitleProps } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 import { CSSProperties, PropsWithChildren, ReactNode, memo } from 'react';
 import { Flexbox } from 'react-layout-kit';
 
 import SafeSpacing from '@/components/SafeSpacing';
 
-const MobileTabBar = dynamic(() => import('@/features/MobileTabBar'));
+// const MobileTabBar = dynamic(() => import('@/features/MobileTabBar'));
 
 const useStyles = createStyles(({ css, cx, stylish }) => ({
   container: cx(
@@ -55,12 +58,12 @@ const AppLayoutMobile = memo<AppMobileLayoutProps>(
           </>
         )}
         {children}
-        {showTabBar && (
+        {/* {showTabBar && (
           <>
             <SafeSpacing mobile position={'bottom'} />
             <MobileTabBar className={styles.mobileTabBar} />
           </>
-        )}
+        )} */}
       </Flexbox>
     );
   },

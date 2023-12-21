@@ -13,6 +13,7 @@ export default memo(({ children }: PropsWithChildren) => {
   useSwitchSideBarOnInit(SidebarTabKey.Chat);
   return (
     <AppLayoutDesktop>
+      {/* 左侧会话列表（助手列表） */}
       <ResponsiveSessionList />
       <Flexbox
         flex={1}

@@ -12,7 +12,7 @@ import { SidebarTabKey } from '@/store/global/initialState';
 
 import List from '../../features/SideBar/List';
 import AvatarBanner from '../features/AvatarBanner';
-import ExtraList from '../features/ExtraList';
+// import ExtraList from '../features/ExtraList';
 import Layout from './layout.mobile';
 
 const useStyles = createStyles(({ css, token }) => ({
@@ -41,7 +41,7 @@ const Setting = memo(() => {
       <div style={{ width: '100%' }}>
         <List />
         <div className={styles.divider} />
-        <ExtraList />
+        {/* <ExtraList /> */}
         <Center style={{ paddingInline: 64 }}>
           <Divider>
             <span className={styles.footer}>LobeChat v{CURRENT_VERSION}</span>
