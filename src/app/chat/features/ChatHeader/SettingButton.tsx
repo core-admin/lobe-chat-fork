@@ -11,6 +11,7 @@ import { pathString } from '@/utils/url';
 
 const SettingButton = memo<{ mobile?: boolean }>(({ mobile }) => {
   const isInbox = useSessionStore(sessionSelectors.isInboxSession);
+  const isInboxDalle = useSessionStore(sessionSelectors.isInboxDalleSession);
   const { t } = useTranslation('common');
   const router = useRouter();
 
@@ -19,7 +20,9 @@ const SettingButton = memo<{ mobile?: boolean }>(({ mobile }) => {
       icon={AlignJustify}
       onClick={() => {
         router.push(
-          pathString(isInbox ? '/settings/agent' : '/chat/settings', { hash: location.hash }),
+          pathString(isInbox || isInboxDalle ? '/settings/agent' : '/chat/settings', {
+            hash: location.hash,
+          }),
         );
       }}
       size={mobile ? MOBILE_HEADER_ICON_SIZE : DESKTOP_HEADER_ICON_SIZE}

@@ -1,4 +1,4 @@
-import { DEFAULT_OPENAI_MODEL_LIST } from '@/const/llm';
+import { _DEFAULT_OPENAI_MODEL_LIST } from '@/const/llm';
 import { DEFAULT_LANG } from '@/const/locale';
 import { DEFAULT_AGENT_META } from '@/const/meta';
 import {
@@ -33,7 +33,7 @@ const modelListSelectors = (s: GlobalStore) => {
   let models: CustomModels = [];
 
   const modelNames = [
-    ...DEFAULT_OPENAI_MODEL_LIST,
+    ..._DEFAULT_OPENAI_MODEL_LIST,
     ...(s.settings.languageModel.openAI.customModelName || '').split(/[,，]/).filter(Boolean),
   ];
 
@@ -57,7 +57,8 @@ const modelListSelectors = (s: GlobalStore) => {
     }
 
     models.push({
-      displayName: displayName || name,
+      displayName: displayName ? `${name}（${displayName}）` : name,
+      // displayName: displayName || name,
       name,
     });
   }

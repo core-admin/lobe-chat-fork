@@ -50,22 +50,32 @@ interface PreviewProps {
 
 const Preview = memo<PreviewProps>(({ withSystemRole, imageType, withBackground, withFooter }) => {
   const [loading, setLoading] = useState(false);
-  const [isInbox, title, description, avatar, backgroundColor, model, plugins, systemRole] =
-    useSessionStore((s) => [
-      sessionSelectors.isInboxSession(s),
-      agentSelectors.currentAgentTitle(s),
-      agentSelectors.currentAgentDescription(s),
-      agentSelectors.currentAgentAvatar(s),
-      agentSelectors.currentAgentBackgroundColor(s),
-      agentSelectors.currentAgentModel(s),
-      agentSelectors.currentAgentPlugins(s),
-      agentSelectors.currentAgentSystemRole(s),
-    ]);
+  const [
+    isInbox,
+    isInboxDalle,
+    title,
+    description,
+    avatar,
+    backgroundColor,
+    model,
+    plugins,
+    systemRole,
+  ] = useSessionStore((s) => [
+    sessionSelectors.isInboxSession(s),
+    sessionSelectors.isInboxDalleSession(s),
+    agentSelectors.currentAgentTitle(s),
+    agentSelectors.currentAgentDescription(s),
+    agentSelectors.currentAgentAvatar(s),
+    agentSelectors.currentAgentBackgroundColor(s),
+    agentSelectors.currentAgentModel(s),
+    agentSelectors.currentAgentPlugins(s),
+    agentSelectors.currentAgentSystemRole(s),
+  ]);
   const { t } = useTranslation('chat');
   const { styles } = useStyles(withBackground);
 
-  const displayTitle = isInbox ? t('inbox.title') : title;
-  const displayDesc = isInbox ? t('inbox.desc') : description;
+  const displayTitle = isInbox ? t('inbox.title') : isInboxDalle ? '绘图助手' : title;
+  const displayDesc = isInbox || isInboxDalle ? t('inbox.desc') : description;
 
   const handleDownload = useCallback(async () => {
     setLoading(true);

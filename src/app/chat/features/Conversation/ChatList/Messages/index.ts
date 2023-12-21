@@ -21,6 +21,7 @@ export const renderMessages: ChatListProps['renderMessages'] = {
 
 export const useAvatarsClick = (): ChatListProps['onAvatarsClick'] => {
   const [isInbox] = useSessionStore((s) => [sessionSelectors.isInboxSession(s)]);
+  const [isInboxDalle] = useSessionStore((s) => [sessionSelectors.isInboxDalleSession(s)]);
   const [toggleSystemRole] = useGlobalStore((s) => [s.toggleSystemRole]);
   const { mobile } = useResponsive();
   const router = useRouter();
@@ -29,7 +30,7 @@ export const useAvatarsClick = (): ChatListProps['onAvatarsClick'] => {
     switch (role) {
       case 'assistant': {
         return () =>
-          isInbox
+          isInbox || isInboxDalle
             ? router.push('/settings/agent')
             : mobile
               ? router.push(pathString('/chat/settings', { hash: location.hash }))

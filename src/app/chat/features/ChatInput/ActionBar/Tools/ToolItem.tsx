@@ -9,10 +9,10 @@ import { useToolStore } from '@/store/tool';
 import { customPluginSelectors } from '@/store/tool/selectors';
 
 const ToolItem = memo<{ identifier: string; label: string }>(({ identifier, label }) => {
-  const [checked, togglePlugin] = useSessionStore((s) => [
-    agentSelectors.currentAgentPlugins(s).includes(identifier),
-    s.togglePlugin,
-  ]);
+  const [checked, togglePlugin] = useSessionStore((s) => {
+    console.log('identifier >>>', identifier);
+    return [agentSelectors.currentAgentPlugins(s).includes(identifier), s.togglePlugin];
+  });
 
   const isCustom = useToolStore((s) => customPluginSelectors.isCustomPlugin(identifier)(s));
 

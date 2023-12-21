@@ -1,7 +1,7 @@
-import { LanguageModel } from '@/types/llm';
+import { LanguageModel, _LanguageModel } from '@/types/llm';
 
 /**
- * A white list of language models that are allowed to display and be used in the app.
+ * 允许在应用程序中显示和使用的语言模型白名单
  */
 export const LanguageModelWhiteList = [
   // OpenAI
@@ -12,6 +12,8 @@ export const LanguageModelWhiteList = [
 ];
 
 export const DEFAULT_OPENAI_MODEL_LIST: string[] = Object.values(LanguageModel);
+
+export const _DEFAULT_OPENAI_MODEL_LIST: string[] = Object.values(_LanguageModel);
 
 // vision model white list, these models will change the content from string to array
 export const VISION_MODEL_WHITE_LIST = ['gpt-4-vision-preview'];

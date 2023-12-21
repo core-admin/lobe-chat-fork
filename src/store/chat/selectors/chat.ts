@@ -1,8 +1,12 @@
 import { LobePluginType } from '@lobehub/chat-plugin-sdk';
 import { t } from 'i18next';
 
-import { DEFAULT_INBOX_AVATAR, DEFAULT_USER_AVATAR } from '@/const/meta';
-import { INBOX_SESSION_ID } from '@/const/session';
+import {
+  DEFAULT_INBOX_AVATAR,
+  DEFAULT_INBOX_DALLE_AVATAR,
+  DEFAULT_USER_AVATAR,
+} from '@/const/meta';
+import { DALLE_SESSION_ID, INBOX_SESSION_ID } from '@/const/session';
 import { useGlobalStore } from '@/store/global';
 import { useSessionStore } from '@/store/session';
 import { agentSelectors } from '@/store/session/selectors';
@@ -57,7 +61,11 @@ const currentChatsWithGuideMessage =
 
     if (!isBrandNewChat) return data;
 
-    const [activeId, isInbox] = [s.activeId, s.activeId === INBOX_SESSION_ID];
+    const [activeId, isInbox, isInboxDalle] = [
+      s.activeId,
+      s.activeId === INBOX_SESSION_ID,
+      s.activeId === DALLE_SESSION_ID,
+    ];
 
     const inboxMsg = t('inbox.defaultMessage', { ns: 'chat' });
     const agentSystemRoleMsg = t('agentDefaultMessageWithSystemRole', {
@@ -81,7 +89,20 @@ const currentChatsWithGuideMessage =
       updatedAt: initTime,
     } as ChatMessage;
 
-    return [emptyInboxGuideMessage];
+    const inboxDalleMsg =
+      '你好，我是你的绘图助手，你可以问我任何问题，我会尽力回答你，同时我还具备生成图像能力。如果需要获得更加专业或定制的助手，可以点击`+`创建自定义助手';
+
+    const emptyInboxDalleGuideMessage = {
+      content: isInboxDalle ? inboxDalleMsg : !!meta.description ? agentSystemRoleMsg : agentMsg,
+      createdAt: initTime,
+      extra: {},
+      id: 'default',
+      meta: merge({ avatar: DEFAULT_INBOX_DALLE_AVATAR }, meta),
+      role: 'assistant',
+      updatedAt: initTime,
+    } as ChatMessage;
+
+    return [isInbox ? emptyInboxGuideMessage : emptyInboxDalleGuideMessage];
   };
 
 const currentChatsWithHistoryConfig = (s: ChatStore): ChatMessage[] => {

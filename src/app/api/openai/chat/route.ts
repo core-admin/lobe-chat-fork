@@ -7,6 +7,7 @@ import { createChatCompletion } from './createChatCompletion';
 export const runtime = 'edge';
 export const preferredRegion = getPreferredRegion();
 
+// TODO: 需要校验密码
 export const POST = async (req: Request) => {
   const payload = (await req.json()) as OpenAIChatStreamPayload;
 

@@ -9,6 +9,7 @@ import { sessionSelectors } from '@/store/session/selectors';
 
 import CollapseGroup from './CollapseGroup';
 import Inbox from './Inbox';
+import InboxDalle from './InboxDalle';
 import SessionList from './List';
 
 /**
@@ -17,7 +18,6 @@ import SessionList from './List';
 const SessionListContent = memo(() => {
   const { t } = useTranslation('chat');
   const unpinnedSessionList = useSessionStore(sessionSelectors.unpinnedSessionList, isEqual);
-  console.log('unpinnedSessionList >>>', unpinnedSessionList);
   const pinnedList = useSessionStore(sessionSelectors.pinnedSessionList, isEqual);
   const hasPinnedSessionList = useSessionStore(sessionSelectors.hasPinnedSessionList);
 
@@ -42,6 +42,7 @@ const SessionListContent = memo(() => {
   return (
     <>
       <Inbox />
+      <InboxDalle />
       <CollapseGroup
         activeKey={sessionGroupKeys}
         items={items}

@@ -5,6 +5,8 @@ import { merge } from '@/utils/merge';
 
 export const INBOX_SESSION_ID = 'inbox';
 
+export const DALLE_SESSION_ID = 'dalle';
+
 export const DEFAULT_AGENT_LOBE_SESSION: LobeAgentSession = {
   config: DEFAULT_AGENT_CONFIG,
   createdAt: Date.now(),

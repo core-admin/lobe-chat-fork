@@ -17,6 +17,22 @@ export enum LanguageModel {
   GPT4_VISION_PREVIEW = 'gpt-4-vision-preview',
 }
 
+export enum _LanguageModel {
+  /**
+   * GPT 3.5 Turbo
+   */
+  GPT3_5 = 'gpt-3.5-turbo=回复速度更快',
+  GPT3_5_1106 = 'gpt-3.5-turbo-1106=gpt-3.5-turbo模型升级版本🔥',
+  GPT3_5_16K = 'gpt-3.5-turbo-16k=支持更多的上下文',
+  /**
+   * GPT 4
+   */
+  GPT4 = 'gpt-4=推理能力更强，回复速度一般',
+  GPT4_32K = 'gpt-4-32k=支持函数调用',
+  GPT4_PREVIEW = 'gpt-4-1106-preview=gpt-4模型升级版本🔥',
+  GPT4_VISION_PREVIEW = 'gpt-4-vision-preview=视觉预览模型，支持图片输入，聊天请切换其他模型',
+}
+
 // 语言模型的设置参数
 export interface LLMParams {
   /**

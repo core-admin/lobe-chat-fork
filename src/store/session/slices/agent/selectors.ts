@@ -2,7 +2,12 @@ import { VoiceList } from '@lobehub/tts';
 import { t } from 'i18next';
 
 import { DEFAULT_OPENAI_MODEL_LIST, VISION_MODEL_WHITE_LIST } from '@/const/llm';
-import { DEFAULT_AVATAR, DEFAULT_BACKGROUND_COLOR, DEFAULT_INBOX_AVATAR } from '@/const/meta';
+import {
+  DEFAULT_AVATAR,
+  DEFAULT_BACKGROUND_COLOR,
+  DEFAULT_INBOX_AVATAR,
+  DEFAULT_INBOX_DALLE_AVATAR,
+} from '@/const/meta';
 import { DEFAULT_AGENT_CONFIG, DEFAUTT_AGENT_TTS_CONFIG } from '@/const/settings';
 import { settingsSelectors, useGlobalStore } from '@/store/global';
 import { SessionStore } from '@/store/session';
@@ -18,8 +23,17 @@ const currentAgentConfig = (s: SessionStore) => {
   const session = sessionSelectors.currentSession(s);
 
   // if is the inbox session, use the default agent config in global store
+  // TODO: currentAgentConfig
   if (sessionSelectors.isInboxSession(s)) {
     return settingsSelectors.defaultAgentConfig(useGlobalStore.getState());
+  }
+
+  if (sessionSelectors.isInboxDalleSession(s)) {
+    const config = settingsSelectors.defaultAgentConfig(useGlobalStore.getState());
+    const plugin = new Set<string>(config.plugins || []);
+    plugin.add('dalle3');
+    config.plugins = [...plugin];
+    return config;
   }
 
   return merge(DEFAULT_AGENT_CONFIG, session?.config);
@@ -73,12 +87,26 @@ const currentAgentTTSVoice =
 // ==========   Meta   ============== //
 const currentAgentMeta = (s: SessionStore): MetaData => {
   const isInbox = sessionSelectors.isInboxSession(s);
+  const isInboxDalle = sessionSelectors.isInboxDalleSession(s);
+
+  let title: string = t('defaultSession');
+  let avatar = DEFAULT_AVATAR;
+  let description = currentAgentSystemRole(s) || t('noDescription');
+  if (isInbox) {
+    title = t('inbox.title', { ns: 'chat' });
+    avatar = DEFAULT_INBOX_AVATAR;
+    description = t('inbox.desc');
+  } else if (isInboxDalle) {
+    title = '绘图助手';
+    avatar = DEFAULT_INBOX_DALLE_AVATAR;
+    description = t('inbox.desc');
+  }
 
   const defaultMeta = {
-    avatar: isInbox ? DEFAULT_INBOX_AVATAR : DEFAULT_AVATAR,
+    avatar,
     backgroundColor: DEFAULT_BACKGROUND_COLOR,
-    description: isInbox ? t('inbox.desc') : currentAgentSystemRole(s) || t('noDescription'),
-    title: isInbox ? t('inbox.title', { ns: 'chat' }) : t('defaultSession'),
+    description,
+    title,
   };
 
   const session = sessionSelectors.currentSession(s);

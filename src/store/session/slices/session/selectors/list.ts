@@ -1,4 +1,4 @@
-import { INBOX_SESSION_ID } from '@/const/session';
+import { DALLE_SESSION_ID, INBOX_SESSION_ID } from '@/const/session';
 import { sessionHelpers } from '@/store/session/slices/session/helpers';
 import { MetaData } from '@/types/meta';
 import { LobeAgentSession, LobeSessions, SessionGroupDefaultKeys } from '@/types/session';
@@ -14,7 +14,6 @@ const pinnedSessionList = (s: SessionStore) =>
   defaultSessions(s).filter((s) => s.group === SessionGroupDefaultKeys.Pinned);
 
 const unpinnedSessionList = (s: SessionStore) => {
-  console.log('unpinnedSessionList s.sessions >', s);
   return defaultSessions(s).filter((s) => s.group === SessionGroupDefaultKeys.Default);
 };
 
@@ -51,6 +50,8 @@ const hasCustomAgents = (s: SessionStore) => defaultSessions(s).length > 0;
 
 const isInboxSession = (s: SessionStore) => s.activeId === INBOX_SESSION_ID;
 
+const isInboxDalleSession = (s: SessionStore) => s.activeId === DALLE_SESSION_ID;
+
 export const sessionSelectors = {
   currentSession,
   currentSessionSafe,
@@ -58,6 +59,7 @@ export const sessionSelectors = {
   getSessionMetaById,
   hasCustomAgents,
   hasPinnedSessionList,
+  isInboxDalleSession,
   isInboxSession,
   pinnedSessionList,
   searchSessions,

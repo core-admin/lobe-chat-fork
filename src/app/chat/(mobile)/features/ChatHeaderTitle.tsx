@@ -19,13 +19,14 @@ const ChatHeaderTitle = memo(() => {
     topicSelectors.currentTopicLength(s),
     topicSelectors.currentActiveTopic(s),
   ]);
-  const [isInbox, title] = useSessionStore((s) => [
+  const [isInbox, isInBoxDalle, title] = useSessionStore((s) => [
     sessionSelectors.isInboxSession(s),
+    sessionSelectors.isInboxDalleSession(s),
     agentSelectors.currentAgentTitle(s),
   ]);
   const theme = useTheme();
 
-  const displayTitle = isInbox ? t('inbox.title') : title;
+  const displayTitle = isInbox ? t('inbox.title') : isInBoxDalle ? '绘图助手' : title;
 
   return (
     <MobileNavBarTitle

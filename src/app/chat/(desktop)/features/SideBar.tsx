@@ -34,6 +34,7 @@ const Desktop = memo(() => {
   ]);
 
   const isInbox = useSessionStore(sessionSelectors.isInboxSession);
+  const isInboxDalle = useSessionStore(sessionSelectors.isInboxDalleSession);
 
   return (
     <DraggablePanel
@@ -57,7 +58,7 @@ const Desktop = memo(() => {
         }}
       >
         <SafeSpacing />
-        {!isInbox && <SystemRole />}
+        {!isInbox || (!isInboxDalle && <SystemRole />)}
         <TopicListContent />
       </DraggablePanelContainer>
     </DraggablePanel>

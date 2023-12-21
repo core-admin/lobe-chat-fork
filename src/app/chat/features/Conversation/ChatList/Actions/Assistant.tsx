@@ -7,6 +7,7 @@ import { useCustomActions } from './customAction';
 export const AssistantActionsBar: RenderAction = memo(({ text, id, onActionClick, error }) => {
   const { regenerate, edit, copy, divider, del } = useChatListActionsBar(text);
   const { translate, tts } = useCustomActions();
+  // TODO: 将设置会话统一成助手的行为
   if (id === 'default') return;
 
   if (error) return <ErrorActionsBar onActionClick={onActionClick} text={text} />;

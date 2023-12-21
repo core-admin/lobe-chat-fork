@@ -1,6 +1,5 @@
-import { Icon, RenderErrorMessage } from '@lobehub/ui';
-import { Button, Input, Segmented } from 'antd';
-import { KeySquare, SquareAsterisk } from 'lucide-react';
+import { RenderErrorMessage } from '@lobehub/ui';
+import { Button, Input } from 'antd';
 import { memo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Flexbox } from 'react-layout-kit';
@@ -18,13 +17,16 @@ enum Tab {
 
 const InvalidAccess: RenderErrorMessage['Render'] = memo(({ id }) => {
   const { t } = useTranslation('error');
-  const [mode, setMode] = useState<Tab>(Tab.Password);
+  const [
+    mode,
+    // setMode
+  ] = useState<Tab>(Tab.Password);
   const [password, setSettings] = useGlobalStore((s) => [s.settings.password, s.setSettings]);
   const [resend, deleteMessage] = useChatStore((s) => [s.resendMessage, s.deleteMessage]);
 
   return (
     <ErrorActionContainer>
-      <Segmented
+      {/* <Segmented
         block
         onChange={(value) => setMode(value as Tab)}
         options={[
@@ -37,7 +39,7 @@ const InvalidAccess: RenderErrorMessage['Render'] = memo(({ id }) => {
         ]}
         style={{ width: '100%' }}
         value={mode}
-      />
+      /> */}
       <Flexbox gap={24}>
         {mode === Tab.Password && (
           <>

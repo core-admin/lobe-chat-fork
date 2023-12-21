@@ -22,20 +22,20 @@ const Left = memo(() => {
   const init = useSessionChatInit();
   const router = useRouter();
 
-  const [isInbox, title, description, avatar, backgroundColor, model, plugins] = useSessionStore(
-    (s) => [
+  const [isInbox, isInboxDalle, title, description, avatar, backgroundColor, model, plugins] =
+    useSessionStore((s) => [
       sessionSelectors.isInboxSession(s),
+      sessionSelectors.isInboxDalleSession(s),
       agentSelectors.currentAgentTitle(s),
       agentSelectors.currentAgentDescription(s),
       agentSelectors.currentAgentAvatar(s),
       agentSelectors.currentAgentBackgroundColor(s),
       agentSelectors.currentAgentModel(s),
       agentSelectors.currentAgentPlugins(s),
-    ],
-  );
+    ]);
 
-  const displayTitle = isInbox ? t('inbox.title') : title;
-  const displayDesc = isInbox ? t('inbox.desc') : description;
+  const displayTitle = isInbox ? t('inbox.title') : isInboxDalle ? '绘图助手' : title;
+  const displayDesc = isInbox || isInboxDalle ? t('inbox.desc') : description;
 
   return !init ? (
     <Flexbox horizontal>
@@ -52,7 +52,7 @@ const Left = memo(() => {
         avatar={avatar}
         background={backgroundColor}
         onClick={() =>
-          isInbox
+          isInbox || isInboxDalle
             ? router.push('/settings/agent')
             : router.push(pathString('/chat/settings', { hash: location.hash }))
         }
