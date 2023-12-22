@@ -72,7 +72,7 @@ class FileService {
     }
 
     // arrayBuffer to url
-    const url = URL.createObjectURL(new Blob([item.data]));
+    const url = URL.createObjectURL(new Blob([item.data], { type: item.fileType }));
     const base64 = Buffer.from(item.data).toString('base64');
 
     return {

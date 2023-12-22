@@ -49,6 +49,13 @@ export const chatPlugin: StateCreator<
       await messageService.updateMessageContent(id, data);
       await refreshMessages();
     }
+
+    // postToolCalling
+    // @ts-ignore
+    const { [payload.apiName]: action } = get();
+    if (!action || !data) return;
+
+    await action(id, JSON.parse(data));
   },
   invokeDefaultTypePlugin: async (id, payload) => {
     const { refreshMessages, coreProcessMessage, toggleChatLoading } = get();
@@ -78,6 +85,7 @@ export const chatPlugin: StateCreator<
     const chats = chatSelectors.currentChats(get());
     await coreProcessMessage(chats, id);
   },
+
   triggerFunctionCall: async (id) => {
     const { invokeDefaultTypePlugin, invokeBuiltinTool, refreshMessages } = get();
 
@@ -138,6 +146,7 @@ export const chatPlugin: StateCreator<
       }
     }
   },
+
   updatePluginState: async (id, key, value) => {
     const { refreshMessages } = get();
 

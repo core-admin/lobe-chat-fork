@@ -23,13 +23,14 @@ export interface ChatEnhanceAction {
   clearTTS: (id: string) => Promise<void>;
   clearTranslate: (id: string) => Promise<void>;
   generateImageFromPrompts: (items: DallEImageItem[], id: string) => Promise<void>;
-
+  text2image: (id: string, data: DallEImageItem[]) => Promise<void>;
   toggleDallEImageLoading: (key: string, value: boolean) => void;
   translateMessage: (id: string, targetLang: string) => Promise<void>;
   ttsMessage: (
     id: string,
     state?: { contentMd5?: string; file?: string; voice?: string },
   ) => Promise<void>;
+  updateImageItem: (id: string, updater: (data: DallEImageItem[]) => void) => Promise<void>;
 }
 
 export const chatEnhance: StateCreator<
@@ -49,31 +50,42 @@ export const chatEnhance: StateCreator<
   },
 
   generateImageFromPrompts: async (items, messageId) => {
-    const message = chatSelectors.getMessageById(messageId)(get());
-    const parent = chatSelectors.getMessageById(message!.parentId!)(get());
+    const { toggleDallEImageLoading, updateImageItem } = get();
+    // eslint-disable-next-line unicorn/consistent-function-scoping
+    const getMessageById = (id: string) => chatSelectors.getMessageById(id)(get());
+
+    const message = getMessageById(messageId);
+    const parent = getMessageById(message!.parentId!);
     const originPrompt = parent?.content;
 
     await pMap(items, async (params, index) => {
-      get().toggleDallEImageLoading(messageId + params.prompt, true);
+      toggleDallEImageLoading(messageId + params.prompt, true);
       const urls = await imageGenerationService.generateImage(params);
+
       const { id } = await fileService.uploadImageByUrl(urls, {
         metadata: { ...params, originPrompt: originPrompt },
         name: `${originPrompt || params.prompt}_${index}.png`,
       });
 
-      get().toggleDallEImageLoading(messageId + params.prompt, false);
+      toggleDallEImageLoading(messageId + params.prompt, false);
 
-      const nextContent = produce(items, (draft) => {
+      await updateImageItem(messageId, (draft) => {
         draft[index].imageId = id;
       });
-
-      await messageService.updateMessageContent(messageId, JSON.stringify(nextContent));
-      await get().refreshMessages();
     });
   },
+  text2image: async (id, data) => {
+    // const isAutoGen = settingsSelectors.isDalleAutoGenerating(useGlobalStore.getState());
+    // if (!isAutoGen) return;
 
+    await get().generateImageFromPrompts(data, id);
+  },
   toggleDallEImageLoading: (key, value) => {
-    set({ dalleImageLoading: { [key]: value } }, false, n('toggleDallEImageLoading'));
+    set(
+      { dalleImageLoading: { ...get().dalleImageLoading, [key]: value } },
+      false,
+      n('toggleDallEImageLoading'),
+    );
   },
 
   translateMessage: async (id, targetLang) => {
@@ -127,6 +139,17 @@ export const chatEnhance: StateCreator<
 
   ttsMessage: async (id, state = {}) => {
     await messageService.updateMessageTTS(id, state);
+    await get().refreshMessages();
+  },
+
+  updateImageItem: async (id, updater) => {
+    const message = chatSelectors.getMessageById(id)(get());
+    if (!message) return;
+
+    const data: DallEImageItem[] = JSON.parse(message.content);
+
+    const nextContent = produce(data, updater);
+    await messageService.updateMessageContent(id, JSON.stringify(nextContent));
     await get().refreshMessages();
   },
 });
