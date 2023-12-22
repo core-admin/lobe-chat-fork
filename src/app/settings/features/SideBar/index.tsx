@@ -45,10 +45,10 @@ const SideBar = memo(() => {
             <svg
               className={styles.divider}
               fill="none"
-              shape-rendering="geometricPrecision"
+              shapeRendering="geometricPrecision"
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
+              strokeLinecap="round"
+              strokeLinejoin="round"
               style={{ color: theme.colorText }}
               viewBox="0 0 24 24"
             >
