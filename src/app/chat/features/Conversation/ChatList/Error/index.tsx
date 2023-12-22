@@ -9,7 +9,7 @@ import OpenAiBizError from './OpenAiBizError';
 import PluginError from './Plugin/PluginError';
 import PluginSettings from './Plugin/PluginSettings';
 
-// TODO: 处理错误消息
+// MARK: 处理渲染错误消息的地方
 export const renderErrorMessages: ChatListProps['renderErrorMessages'] = {
   [PluginErrorType.PluginMarketIndexNotFound]: {
     Render: PluginError,

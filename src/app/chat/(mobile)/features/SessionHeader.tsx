@@ -8,6 +8,8 @@ import { MOBILE_HEADER_ICON_SIZE } from '@/const/layoutTokens';
 import { useGlobalStore } from '@/store/global';
 import { useSessionStore } from '@/store/session';
 
+import CustomLogoSvg from '../../(desktop)/features/CustomLogoSvg';
+
 export const useStyles = createStyles(({ css, token }) => ({
   logo: css`
     fill: ${token.colorText};
@@ -22,9 +24,11 @@ const Header = memo(() => {
   const [createSession] = useSessionStore((s) => [s.createSession]);
   const router = useRouter();
   const avatar = useGlobalStore((st) => st.settings.avatar);
+  // CustomLogoSvg
   return (
     <MobileNavBar
-      center={<Logo type={'text'} />}
+      // center={<Logo type={'text'} />}
+      center={<CustomLogoSvg height={32} width={32 * 4.5} />}
       left={
         <div onClick={() => router.push('/settings')} style={{ marginLeft: 8 }}>
           {avatar ? <Avatar avatar={avatar} size={28} /> : <Logo size={28} />}
