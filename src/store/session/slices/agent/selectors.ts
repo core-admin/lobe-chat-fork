@@ -9,7 +9,8 @@ import {
   DEFAULT_INBOX_DALLE_AVATAR,
 } from '@/const/meta';
 import { DEFAULT_AGENT_CONFIG, DEFAUTT_AGENT_TTS_CONFIG } from '@/const/settings';
-import { settingsSelectors, useGlobalStore } from '@/store/global';
+import { useGlobalStore } from '@/store/global';
+import { settingsSelectors } from '@/store/global/selectors';
 import { SessionStore } from '@/store/session';
 import { LobeAgentTTSConfig } from '@/types/agent';
 import { LanguageModel } from '@/types/llm';
