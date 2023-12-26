@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+/* eslint-disable unused-imports/no-unused-imports */
 import { ChatList } from '@lobehub/ui';
 import isEqual from 'fast-deep-equal';
 import { memo } from 'react';
@@ -33,7 +36,7 @@ const List = memo(() => {
     return [config.displayMode, config.enableHistoryCount, config.historyCount];
   });
   const onActionsClick = useActionsClick();
-  const onAvatarsClick = useAvatarsClick();
+  // const onAvatarsClick = useAvatarsClick();
 
   const hotkeys = [PREFIX_KEY, REGENERATE_KEY].join('+');
 
@@ -59,7 +62,7 @@ const List = memo(() => {
       historyCount={historyCount}
       loadingId={chatLoadingId}
       onActionsClick={onActionsClick}
-      onAvatarsClick={onAvatarsClick}
+      // onAvatarsClick={onAvatarsClick}
       onMessageChange={(id, content) => updateMessageContent(id, content)}
       renderActions={renderActions}
       renderErrorMessages={renderErrorMessages}

@@ -1,6 +1,9 @@
 import { ChatInputActionBar } from '@lobehub/ui';
 import { ReactNode, memo, useMemo } from 'react';
 
+import { useSessionStore } from '@/store/session';
+import { sessionSelectors } from '@/store/session/selectors';
+
 import { ActionKeys, actionMap, getLeftActionList, getRightActionList } from './config';
 
 const RenderActionList = ({ dataSource }: { dataSource: ActionKeys[] }) => (
@@ -30,8 +33,21 @@ const ActionBar = memo<ActionBarProps>(
     leftAreaStartRender,
     leftAreaEndRender,
   }) => {
-    const leftActionList = useMemo(() => getLeftActionList(mobile), [mobile]);
-    const rightActionList = useMemo(() => getRightActionList(mobile), [mobile]);
+    const [isInbox, isInboxDalle] = useSessionStore((s) => [
+      sessionSelectors.isInboxSession(s),
+      sessionSelectors.isInboxDalleSession(s),
+    ]);
+
+    // TODO: 变更-默认助手不显示模型切换
+    const leftActionList = useMemo(() => {
+      const list = getLeftActionList(mobile);
+      return isInbox || isInboxDalle ? list.filter((key) => key !== 'model') : list;
+    }, [mobile, isInbox, isInboxDalle]);
+
+    const rightActionList = useMemo(() => {
+      const list = getRightActionList(mobile);
+      return isInbox || isInboxDalle ? list.filter((key) => key !== 'model') : list;
+    }, [mobile]);
 
     return (
       <ChatInputActionBar

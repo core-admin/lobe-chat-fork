@@ -1,17 +1,18 @@
 import { DraggablePanel, DraggablePanelContainer } from '@lobehub/ui';
 import { createStyles } from 'antd-style';
-import dynamic from 'next/dynamic';
+// import dynamic from 'next/dynamic';
 import { memo } from 'react';
 
 import SafeSpacing from '@/components/SafeSpacing';
 import { CHAT_SIDEBAR_WIDTH } from '@/const/layoutTokens';
 import { useGlobalStore } from '@/store/global';
-import { useSessionStore } from '@/store/session';
-import { sessionSelectors } from '@/store/session/selectors';
 
+// import { useSessionStore } from '@/store/session';
+// import { sessionSelectors } from '@/store/session/selectors';
 import TopicListContent from '../../features/TopicListContent';
 
-const SystemRole = dynamic(() => import('../../features/SystemRole'));
+// TODO: 变更-默认助手不显示角色设定
+// const SystemRole = dynamic(() => import('../../features/SystemRole'));
 
 const useStyles = createStyles(({ css, token }) => ({
   content: css`
@@ -33,8 +34,8 @@ const Desktop = memo(() => {
     s.toggleChatSideBar,
   ]);
 
-  const isInbox = useSessionStore(sessionSelectors.isInboxSession);
-  const isInboxDalle = useSessionStore(sessionSelectors.isInboxDalleSession);
+  // const isInbox = useSessionStore(sessionSelectors.isInboxSession);
+  // const isInboxDalle = useSessionStore(sessionSelectors.isInboxDalleSession);
 
   return (
     <DraggablePanel
@@ -58,7 +59,7 @@ const Desktop = memo(() => {
         }}
       >
         <SafeSpacing />
-        {!isInbox || (!isInboxDalle && <SystemRole />)}
+        {/* {(!isInbox || !isInboxDalle) && <SystemRole />} */}
         <TopicListContent />
       </DraggablePanelContainer>
     </DraggablePanel>

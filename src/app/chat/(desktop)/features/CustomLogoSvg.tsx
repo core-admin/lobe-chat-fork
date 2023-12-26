@@ -6,7 +6,6 @@ const CustomLogoSvg = memo<
     width?: number;
   } & Record<string, any>
 >((props = {}) => {
-  console.log(props);
   // h 15 w 112
 
   return (

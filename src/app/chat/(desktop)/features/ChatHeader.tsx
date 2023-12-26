@@ -2,7 +2,7 @@ import { SiOpenai } from '@icons-pack/react-simple-icons';
 import { ActionIcon, Avatar, ChatHeader, ChatHeaderTitle, Tag } from '@lobehub/ui';
 import { Skeleton } from 'antd';
 import { PanelRightClose, PanelRightOpen } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Flexbox } from 'react-layout-kit';
@@ -11,8 +11,8 @@ import { DESKTOP_HEADER_ICON_SIZE } from '@/const/layoutTokens';
 import { useGlobalStore } from '@/store/global';
 import { useSessionChatInit, useSessionStore } from '@/store/session';
 import { agentSelectors, sessionSelectors } from '@/store/session/selectors';
-import { pathString } from '@/utils/url';
 
+// import { pathString } from '@/utils/url';
 import PluginTag from '../../features/ChatHeader/PluginTag';
 import SettingButton from '../../features/ChatHeader/SettingButton';
 import ShareButton from '../../features/ChatHeader/ShareButton';
@@ -20,7 +20,7 @@ import ShareButton from '../../features/ChatHeader/ShareButton';
 const Left = memo(() => {
   const { t } = useTranslation('chat');
   const init = useSessionChatInit();
-  const router = useRouter();
+  // const router = useRouter();
 
   const [isInbox, isInboxDalle, title, description, avatar, backgroundColor, model, plugins] =
     useSessionStore((s) => [
@@ -51,11 +51,12 @@ const Left = memo(() => {
       <Avatar
         avatar={avatar}
         background={backgroundColor}
-        onClick={() =>
-          isInbox || isInboxDalle
-            ? router.push('/settings/agent')
-            : router.push(pathString('/chat/settings', { hash: location.hash }))
-        }
+        onClick={() => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+          // isInbox || isInboxDalle
+          //   ? router.push('/settings/agent')
+          //   : router.push(pathString('/chat/settings', { hash: location.hash }));
+        }}
         size={40}
         title={title}
       />

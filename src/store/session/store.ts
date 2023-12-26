@@ -14,7 +14,6 @@ import { SessionAction, createSessionSlice } from './slices/session/action';
 
 export type SessionStore = SessionAction & AgentAction & SessionStoreState;
 const createStore: StateCreator<SessionStore, [['zustand/devtools', never]]> = (...parameters) => {
-  console.log('parameters >>>', parameters);
   return {
     ...initialState,
     ...createAgentSlice(...parameters),
